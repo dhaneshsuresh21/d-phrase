@@ -50,7 +50,7 @@ const Translate = () => {
 
     const options = {
       method: "POST",
-      url: "http://localhost:9001/translate",
+      url: "https://d-phrase-server.onrender.com",
 
       data: {
         source: source,

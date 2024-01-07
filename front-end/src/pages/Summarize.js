@@ -29,7 +29,7 @@ const Summarize = () => {
     }
     const options = {
       method: "POST",
-      url: "http://localhost:9001/summarize",
+      url: "https://d-phrase-server.onrender.com",
 
       data: {
         paragraph: paragraph,

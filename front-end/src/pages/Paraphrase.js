@@ -35,7 +35,7 @@ const Paraphrase = () => {
 
         const options = {
             method: "POST",
-            url: "http://localhost:9001/paraphrase",
+            url: "https://d-phrase-server.onrender.com",
       
             data: {
               phrase: phrase,
