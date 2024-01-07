@@ -11,7 +11,17 @@ server.use(cors());
 const PORT = process.env.PORT || 3000;
 
 server.post("/paraphrase", async (req, res) => {
+
+  
   const phrase = req.body.phrase;
+
+  const encodedParams = new URLSearchParams();
+  encodedParams.set('text', phrase);
+  encodedParams.set('lang', 'en');
+  encodedParams.set('paraphrase_capital', 'true');
+  encodedParams.set('protected', 'YOUR;something');
+
+
   const X_RAPID_API_KEY = process.env.X_RAPID_API_KEY_PARAPHRASE;
   const X_RAPID_API_HOST = process.env.X_RAPID_API_HOST_PARAPHRASE;
   const URL = process.env.URL_PARAPHRASE;
@@ -20,23 +30,24 @@ server.post("/paraphrase", async (req, res) => {
     method: "POST",
     url: URL,
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/x-www-form-urlencoded',
       "X-RapidAPI-Key": X_RAPID_API_KEY,
       "X-RapidAPI-Host": X_RAPID_API_HOST,
     },
-    data: { input: phrase },
+    data: encodedParams,
   };
 
   try {
     const response = await axios.request(options);
-    console.log(response.data.output);
-    return res.send({ data: response.data.output });
+    // console.log(response.data.output);
+    console.log(response.data.text);
+    return res.send({ data: response.data.text });
   } catch (error) {
     console.error(error);
     return res.send({ error: error.message });
   }
 
-  return res.send("####");
+  return res.send({message:"Please try later "});
 });
 
 server.post("/translate", async (req, res) => {
@@ -79,7 +90,8 @@ server.post("/translate", async (req, res) => {
     // res.status(error);
     return res.send({ error: error.response.data.message });
   }
-  return res.send("####");
+  return res.send({message:"Please try later "});
+
 });
 
 server.post("/summarize", async (req, res) => {
@@ -109,6 +121,8 @@ server.post("/summarize", async (req, res) => {
     console.error(error);
     return res.send({error:error});
   }
+  return res.send({message:"Please try later "});
+
 });
 
 server.listen(PORT, () => {
