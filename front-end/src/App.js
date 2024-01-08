@@ -7,7 +7,7 @@ import Summarize from "./pages/Summarize";
 function App() {
   return (
     <>
-      <Dashboard />
+        <Dashboard />
 
         <Routes>
         <Route exact path="/"  element={<Translate />}/>
